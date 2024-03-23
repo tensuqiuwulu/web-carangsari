@@ -17,16 +17,11 @@
         <div class="row">
             <div class="col-lg-8">
                 <h2>Denah</h2>
-                <img src="https://via.placeholder.com/800x600" alt="Denah" class="img-fluid">
+                <img src="{{ asset('storage/denah/' . ($denah->foto ?? '')) ?: 'https://via.placeholder.com/800x600' }}" alt="Denah" class="img-fluid">
             </div>
             <div class="col-lg-4">
-                <h2>Legenda</h2>
-                <ul class="list-group">
-                    <li class="list-group-item">Ruangan A - Kantor</li>
-                    <li class="list-group-item">Ruangan B - Ruang Rapat</li>
-                    <li class="list-group-item">Ruangan C - Kamar Mandi</li>
-                    <!-- Tambahkan item legenda lainnya sesuai kebutuhan -->
-                </ul>
+                <h2>Deskripsi</h2>
+                {!! $denah->deskripsi ?? '' !!}
             </div>
         </div>
     </div>

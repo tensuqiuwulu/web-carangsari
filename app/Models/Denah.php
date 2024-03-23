@@ -13,6 +13,7 @@ class Denah extends Model
 
     protected $fillable = [
         'judul',
+        'deskripsi',
         'foto'
     ];
 
