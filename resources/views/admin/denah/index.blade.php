@@ -37,7 +37,7 @@
 
                         <div class="row mb-3">
                             <div class="col-sm-10">
-                                <img src="{{ asset('storage/denah/' . $denah->foto) }}" class="img-fluid" alt="">
+                                <img src="{{ asset('storage/denah/' . ($denah->foto ?? '')) }}" class="img-fluid" alt="">
                             </div>
                         </div>
                     </div>

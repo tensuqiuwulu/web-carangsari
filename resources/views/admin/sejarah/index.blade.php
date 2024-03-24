@@ -37,14 +37,15 @@
 
                         <div class="row mb-3">
                             <div class="col-sm-10">
-                                <img src="{{ asset('storage/sejarah/' . $sejarah->foto) }}" class="img-fluid" alt="">
+                                <img src="{{ asset('storage/sejarah/' . ($sejarah->foto ?? '')) }}" class="img-fluid" alt="">
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </form>
         </div>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        </form>
+    </div>
     </div>
 </section>
 
