@@ -20,7 +20,7 @@
             </div>
             <div class="col-lg-6">
                 <!-- get foto sejarah -->
-                <img src="{{ asset('storage/sejarah/' . $sejarah->foto) }}" alt="Sejarah" class="img-fluid">
+                <img src="{{ asset('storage/sejarah/' . ($sejarah->foto ?? '')) }}" alt="Sejarah" class="img-fluid">
             </div>
         </div>
     </div>

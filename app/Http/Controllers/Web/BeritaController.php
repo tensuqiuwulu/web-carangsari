@@ -10,14 +10,15 @@ class BeritaController extends Controller
 {
     public function index()
     {
-        $berita = Berita::all();
-        return view('web.berita.index', compact('berita'));
+        $berita = Berita::paginate(5);
+        $recentBerita = Berita::orderBy('created_at', 'desc')->limit(5)->get();
+        return view('web.berita.index', compact('berita', 'recentBerita'));
     }
 
     public function show($id)
     {
-
         $berita = Berita::find($id);
-        return view('web.berita.show', compact('berita'));
+        $recentBerita = Berita::orderBy('created_at', 'desc')->limit(5)->get();
+        return view('web.berita.show', compact('berita', 'recentBerita'));
     }
 }

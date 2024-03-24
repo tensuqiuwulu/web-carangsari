@@ -46,11 +46,13 @@
 
                     <h3 class="sidebar-title">Recent Posts</h3>
                     <div class="sidebar-item recent-posts">
+                        @foreach ($recentBerita as $item)
                         <div class="post-item clearfix">
-                            <img src="assets/img/blog/blog-recent-1.jpg" alt="">
-                            <h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
-                            <time datetime="2020-01-01">Jan 1, 2020</time>
+                            <img src="{{ asset('storage/berita/' . $item->foto) }}" alt="">
+                            <h4><a href="{{ route('berita.show', ['id' => $item->id]) }}">{{ $item->judul }}</a></h4>
+                            <time datetime="2020-01-01">{{ $item->created_at }}</time>
                         </div>
+                        @endforeach
 
                     </div><!-- End sidebar recent posts-->
 

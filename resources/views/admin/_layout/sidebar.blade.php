@@ -24,14 +24,14 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="index.html">
+            <a class="nav-link {{ request()->routeIs('admin.gallery.index') ? '' : 'collapsed' }}" href="{{ route('admin.gallery.index') }}">
                 <i class="bi bi-grid"></i>
                 <span>Gallery</span>
             </a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="index.html">
+            <a class="nav-link {{ request()->routeIs('admin.peninggalan_kuno.index') ? '' : 'collapsed' }}" href="{{ route('admin.peninggalan_kuno.index') }}">
                 <i class="bi bi-grid"></i>
                 <span>Peninggalan Kuno</span>
             </a>

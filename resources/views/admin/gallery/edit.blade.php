@@ -15,29 +15,26 @@
 <section class="section">
     <div class="row">
         <div class="col-lg-12">
-            <form action="{{ route('admin.berita.store') }}">
+            <form action="{{ route('admin.gallery.update', ['id' => $gallery->id]) }}">
                 @csrf
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Judul Berita</h5>
-                        <input type="text" class="form-control mb-3" name="judul">
+                        <h5 class="card-title">Nama Foto</h5>
+                        <input type="text" class="form-control mb-3" name="judul" value="{{ $gallery->judul }}">
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Isi Berita</h5>
-                        <div id="quill-editor" class="mb-3" style="height: 300px;">
-
-                        </div>
-                        <textarea rows="3" class="mb-3 d-none" name="deskripsi" id="quill-editor-area"></textarea>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Upload Gambar Berita</h5>
+                        <h5 class="card-title">Upload Gambar Baru</h5>
                         <div class="row mb-3">
                             <div class="col-sm-10">
                                 <input class="form-control" type="file" id="formFile" name="foto">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-10">
+                                <img src="{{ asset('storage/gallery/' . $gallery->foto) }}" class="img-fluid" alt="">
                             </div>
                         </div>
                     </div>
@@ -49,22 +46,6 @@
 </section>
 
 @push('js')
-<script>
-    var quillEditor = document.getElementById('quill-editor-area');
-    document.addEventListener('DOMContentLoaded', function() {
-        if (quillEditor) {
-            var editor = new Quill('#quill-editor', {
-                theme: 'snow'
-            });
-            editor.on('text-change', function() {
-                quillEditor.value = editor.root.innerHTML;
-            });
-            quillEditor.addEventListener('input', function() {
-                editor.root.innerHTML = quillEditor.value;
-            });
-        }
-    });
-</script>
 
 <script>
     // make post ajax
@@ -82,10 +63,9 @@
                     processData: false,
                     success: function(data) {
                         alert('Data berhasil disimpan');
-                        window.location.href = "{{ route('admin.berita.index') }}";
+                        window.location.href = "{{ route('admin.gallery.index') }}";
                     },
                     error: function(xhr, status, error) {
-                        var err = eval("(" + xhr.responseText + ")");
                         alert('Data gagal disimpan');
                     }
                 });

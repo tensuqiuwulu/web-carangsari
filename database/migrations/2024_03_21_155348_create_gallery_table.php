@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('gallery', function (Blueprint $table) {
             $table->id();
             $table->string('judul', 100);
-            $table->text('deskripsi');
             $table->text('foto');
             $table->timestamps();
         });

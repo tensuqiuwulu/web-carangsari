@@ -15,17 +15,17 @@
 <section class="section">
     <div class="row">
         <div class="col-lg-12">
-            <form action="{{ route('admin.berita.store') }}">
+            <form action="{{ route('admin.peninggalan_kuno.store') }}">
                 @csrf
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Judul Berita</h5>
+                        <h5 class="card-title">Nama Peninggalan Kuno</h5>
                         <input type="text" class="form-control mb-3" name="judul">
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Isi Berita</h5>
+                        <h5 class="card-title">Deskripsi Peninggalan Kuno</h5>
                         <div id="quill-editor" class="mb-3" style="height: 300px;">
 
                         </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Upload Gambar Berita</h5>
+                        <h5 class="card-title">Upload Gambar Peninggalan Kuno</h5>
                         <div class="row mb-3">
                             <div class="col-sm-10">
                                 <input class="form-control" type="file" id="formFile" name="foto">
@@ -82,7 +82,7 @@
                     processData: false,
                     success: function(data) {
                         alert('Data berhasil disimpan');
-                        window.location.href = "{{ route('admin.berita.index') }}";
+                        window.location.href = "{{ route('admin.peninggalan_kuno.index') }}";
                     },
                     error: function(xhr, status, error) {
                         var err = eval("(" + xhr.responseText + ")");

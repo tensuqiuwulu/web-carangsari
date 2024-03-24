@@ -66,22 +66,24 @@
         $('form').submit(function(e) {
             e.preventDefault();
             var formData = new FormData(this);
-            $.ajax({
-                type: 'POST',
-                url: $(this).attr('action'),
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(data) {
-                    alert('Data berhasil disimpan');
-                    window.location.href = "{{ route('admin.sejarah.index') }}";
-                },
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    alert('Data gagal disimpan');
-                }
-            });
+            if (confirm("Apakah Anda Yakin Ingin Menyimpan ?")) {
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+                        alert('Data berhasil disimpan');
+                        window.location.href = "{{ route('admin.sejarah.index') }}";
+                    },
+                    error: function(xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert('Data gagal disimpan');
+                    }
+                });
+            }
         });
     });
 </script>

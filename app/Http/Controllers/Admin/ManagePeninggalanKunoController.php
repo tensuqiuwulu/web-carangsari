@@ -4,19 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
-use App\Models\Berita;
+use App\Models\PeninggalanKuno;
 
-class ManageBeritaController extends Controller
+class ManagePeninggalanKunoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-
-        $berita = Berita::all();
-        return view('admin.berita.index', compact('berita'));
+        // get peninggalan kuno
+        $peninggalanKuno = PeninggalanKuno::all();
+        return view('admin.peninggalan_kuno.index', compact('peninggalanKuno'));
     }
 
     /**
@@ -24,7 +23,8 @@ class ManageBeritaController extends Controller
      */
     public function create()
     {
-        return view('admin.berita.create');
+        //
+        return view('admin.peninggalan_kuno.create');
     }
 
     /**
@@ -43,26 +43,26 @@ class ManageBeritaController extends Controller
             // upload image to storage
             $foto = $request->file('foto');
             $fotoName = time() . '.' . $foto->extension();
-            $foto->storeAs('public/berita', $fotoName);
+            $foto->storeAs('public/peninggalan_kuno', $fotoName);
 
             // create berita
-            $berita = new Berita();
-            $berita->judul = $request->judul;
-            $berita->deskripsi = $request->deskripsi;
-            $berita->foto = $fotoName;
-            $berita->save();
+            $PeninggalanKuno = new PeninggalanKuno();
+            $PeninggalanKuno->judul = $request->judul;
+            $PeninggalanKuno->deskripsi = $request->deskripsi;
+            $PeninggalanKuno->foto = $fotoName;
+            $PeninggalanKuno->save();
 
             return response()->json([
-                'message' => 'Berita berhasil disimpan'
+                'message' => 'Peninggalan Kuno berhasil disimpan'
             ], 200);
         } catch (\Exception $e) {
             // remove foto
             if (isset($fotoName)) {
-                Storage::delete('public/berita/' . $fotoName);
+                Storage::delete('public/peninggalan_kuno/' . $fotoName);
             }
 
             return response()->json([
-                'message' => 'Berita gagal disimpan',
+                'message' => 'Peninggalan Kuno gagal disimpan',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -81,9 +81,9 @@ class ManageBeritaController extends Controller
      */
     public function edit(string $id)
     {
-        // Find data
-        $berita = Berita::find($id);
-        return view('admin.berita.edit', compact('berita'));
+        // get peninggalan kuno
+        $peninggalanKuno = PeninggalanKuno::find($id);
+        return view('admin.peninggalan_kuno.edit', compact('peninggalanKuno'));
     }
 
     /**
@@ -95,40 +95,33 @@ class ManageBeritaController extends Controller
         $request->validate([
             'judul' => 'required',
             'deskripsi' => 'required',
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         try {
-            // find berita
-            $berita = Berita::find($id);
-
             // upload image to storage
-            if ($request->hasFile('foto')) {
-                $foto = $request->file('foto');
-                $fotoName = time() . '.' . $foto->extension();
-                $foto->storeAs('public/berita', $fotoName);
+            $foto = $request->file('foto');
+            $fotoName = time() . '.' . $foto->extension();
+            $foto->storeAs('public/peninggalan_kuno', $fotoName);
 
-                // remove old foto
-                Storage::delete('public/berita/' . $berita->foto);
-                $berita->foto = $fotoName;
-            }
-
-            // update berita
-            $berita->judul = $request->judul;
-            $berita->deskripsi = $request->deskripsi;
-            $berita->save();
+            // update peninggalan kuno
+            $PeninggalanKuno = PeninggalanKuno::find($id);
+            $PeninggalanKuno->judul = $request->judul;
+            $PeninggalanKuno->deskripsi = $request->deskripsi;
+            $PeninggalanKuno->foto = $fotoName;
+            $PeninggalanKuno->save();
 
             return response()->json([
-                'message' => 'Berita berhasil diupdate'
+                'message' => 'Peninggalan Kuno berhasil diupdate'
             ], 200);
         } catch (\Exception $e) {
             // remove foto
             if (isset($fotoName)) {
-                Storage::delete('public/berita/' . $fotoName);
+                Storage::delete('public/peninggalan_kuno/' . $fotoName);
             }
 
             return response()->json([
-                'message' => 'Berita gagal diupdate',
+                'message' => 'Peninggalan Kuno gagal diupdate',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -139,9 +132,9 @@ class ManageBeritaController extends Controller
      */
     public function destroy(string $id)
     {
-        // Destroy data
-        $berita = Berita::find($id);
-        $berita->delete();
-        return redirect()->route('admin.berita.index');
+        // delete peninggalan kuno
+        $PeninggalanKuno = PeninggalanKuno::find($id);
+        $PeninggalanKuno->delete();
+        return redirect()->route('admin.peninggalan_kuno.index');
     }
 }

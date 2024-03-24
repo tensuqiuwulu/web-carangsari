@@ -28,7 +28,7 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @stack('css')
 </head>
 
