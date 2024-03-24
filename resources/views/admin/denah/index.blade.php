@@ -34,6 +34,12 @@
                                 <input class="form-control" type="file" id="formFile" name="foto">
                             </div>
                         </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-10">
+                                <img src="{{ asset('storage/denah/' . $denah->foto) }}" class="img-fluid" alt="">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
