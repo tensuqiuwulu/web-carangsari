@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Berita;
+use Illuminate\Support\Facades\Storage;
 
 class ManageBeritaController extends Controller
 {
