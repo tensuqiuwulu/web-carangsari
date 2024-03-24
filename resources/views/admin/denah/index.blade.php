@@ -23,7 +23,9 @@
                         <div id="quill-editor" class="mb-3" style="height: 300px;">
                             {!! $denah->deskripsi ?? '' !!}
                         </div>
-                        <textarea rows="3" class="mb-3 d-none" name="deskripsi" id="quill-editor-area"></textarea>
+                        <textarea rows="3" class="mb-3 d-none" name="deskripsi" id="quill-editor-area">
+                        {{ $denah->deskripsi }}
+                        </textarea>
                     </div>
                 </div>
                 <div class="card">
