@@ -31,23 +31,27 @@ class ManageSejarahController extends Controller
      */
     public function store(Request $request)
     {
+
         // request validate
         $request->validate([
             'deskripsi' => 'required',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         try {
+            $sejarah = Sejarah::firstOrNew(['id' => 1]);
             // upload image to storage
-            $foto = $request->file('foto');
-            $fotoName = time() . '.' . $foto->extension();
-            $foto->storeAs('public/sejarah', $fotoName);
+            if ($request->hasFile('foto')) {
+                $foto = $request->file('foto');
+                $fotoName = time() . '.' . $foto->extension();
+                $foto->storeAs('public/sejarah', $fotoName);
+
+                $sejarah->foto = $fotoName;
+            }
 
             // update or create
-            $sejarah = Sejarah::firstOrNew(['id' => 1]);
             $sejarah->judul = 'Sejarah';
             $sejarah->deskripsi = $request->deskripsi;
-            $sejarah->foto = $fotoName;
             $sejarah->save();
 
             return response()->json([

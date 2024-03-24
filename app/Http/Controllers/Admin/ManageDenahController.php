@@ -34,20 +34,24 @@ class ManageDenahController extends Controller
         // request validate
         $request->validate([
             'deskripsi' => 'required',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         try {
+            $denah = Denah::firstOrNew(['id' => 1]);
             // upload image to storage
-            $foto = $request->file('foto');
-            $fotoName = time() . '.' . $foto->extension();
-            $foto->storeAs('public/denah', $fotoName);
+            if ($request->hasFile('foto')) {
+                $foto = $request->file('foto');
+                $fotoName = time() . '.' . $foto->extension();
+                $foto->storeAs('public/denah', $fotoName);
+
+                $denah->foto = $fotoName;
+            }
 
             // update or create
-            $denah = Denah::firstOrNew(['id' => 1]);
+
             $denah->judul = 'Sejarah';
             $denah->deskripsi = $request->deskripsi;
-            $denah->foto = $fotoName;
             $denah->save();
 
             return response()->json([

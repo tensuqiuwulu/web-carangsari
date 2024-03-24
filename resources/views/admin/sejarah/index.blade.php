@@ -15,7 +15,7 @@
 <section class="section">
     <div class="row">
         <div class="col-lg-12">
-            <form>
+            <form action="{{ route('admin.sejarah.store') }}">
                 @csrf
                 <div class="card">
                     <div class="card-body">
@@ -23,7 +23,9 @@
                         <div id="quill-editor" class="mb-3" style="height: 300px;">
                             {!! $sejarah->deskripsi ?? '' !!}
                         </div>
-                        <textarea rows="3" class="mb-3 d-none" name="deskripsi" id="quill-editor-area"></textarea>
+                        <textarea rows="3" class="mb-3 d-none" name="deskripsi" id="quill-editor-area">
+                        {{ $sejarah->deskripsi }}
+                        </textarea>
                     </div>
                 </div>
                 <div class="card">
@@ -80,6 +82,9 @@
                     cache: false,
                     contentType: false,
                     processData: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                     success: function(data) {
                         alert('Data berhasil disimpan');
                         window.location.href = "{{ route('admin.sejarah.index') }}";
