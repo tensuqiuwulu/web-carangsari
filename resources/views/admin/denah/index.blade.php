@@ -24,7 +24,7 @@
                             {!! $denah->deskripsi ?? '' !!}
                         </div>
                         <textarea rows="3" class="mb-3 d-none" name="deskripsi" id="quill-editor-area">
-                        {{ $denah->deskripsi }}
+                        {{ $denah->deskripsi ?? '' }}
                         </textarea>
                     </div>
                 </div>
