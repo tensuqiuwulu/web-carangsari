@@ -41,6 +41,8 @@ Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'postLogin'])->name('post.login');
 
+//logout
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // admin routes
 Route::middleware(['auth.custom'])->prefix('admin')->group(function () {
